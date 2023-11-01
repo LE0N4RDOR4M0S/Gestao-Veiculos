@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Itinerário</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: gold;
+            color: black;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: yellow;
+            color: black;
+        }
+
+        .add-button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .table-container{
+            max-height: 500px; /* Defina a altura máxima desejada */
+            overflow-y: auto; /* Adicione uma barra de rolagem vertical quando a tabela for maior que a altura máxima */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Gestão de Veículos escolares</h1>
+    </div>
+    <div class="container">
+        <a th:href="@{'/itinerario/add/' + ${rota.id}}" class="add-button">Adicionar+</a>
+  		<a style="background-color: darkred; color: white;" class="add-button" th:href="@{'/rotas/' + ${rota.id}}">Voltar</a>
+        <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Rota</th>
+                    <th>Parada</th>
+                    <th>Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="itin : ${itinerario}">
+                        <td th:text="${itin.id}"></td>
+                        <td th:text="${itin.rota.id}"></td>
+                        <td th:text="${itin.parada.endereco}"></td>
+                        <td th:text="${itin.hora}"></td>
+                        <td>
+                            <a th:href="@{'/itinerario/delete/' + ${itin.id}}" style="background-color: red" class="add-button delete-link">Excluir</a>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var deleteLinks = document.querySelectorAll(".delete-link");
+
+        deleteLinks.forEach(function (link) {
+            link.addEventListener("click", function (event) {
+                event.preventDefault(); // Impede o link de redirecionar imediatamente
+
+                var confirmDelete = confirm("Tem certeza que deseja excluir este item?");
+
+                if (confirmDelete) {
+                    // Se o usuário confirmar, siga o link para a exclusão
+                    window.location.href = link.getAttribute("href");
+                } else {
+                    // Se o usuário cancelar, não faça nada
+                }
+            });
+        });
+    });
+	</script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sucesso</title>
+    <style>
+        body {
+            background-color: lightyellow; /* Amarelo */
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .container {
+            background-color: #FFFFFF; /* Branco */
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .imagem {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            display: block;
+            border-radius: 50%;
+        }
+
+        a {
+            width: 120px;
+            font-size: 16px; /* Ajuste o tamanho da fonte conforme necessário */
+            background-color: green;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer; /* Adicionado estilo de cursor */
+            margin: 5px;
+        }
+
+
+        button {
+            width: 120px;
+            font-size: 16px; /* Ajuste o tamanho da fonte conforme necessário */
+            background-color: green;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer; /* Adicionado estilo de cursor */
+            margin: 5px;
+        }
+
+        h2 {
+            color: #000; /* Preto */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="imagem" src="salvo.png">
+        <h2>Salvo com Sucesso</h2>
+        <a href="/dashboard" style="margin: 10px;" class="btn btn-voltar">Voltar para tela inicial</a>
+        <a onclick="window.history.back()" style="margin: 10px;" class="btn btn-voltar">Voltar</a>
+    </div>
+</body>
+</html>

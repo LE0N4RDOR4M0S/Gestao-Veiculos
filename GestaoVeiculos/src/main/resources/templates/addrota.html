@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Rota</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-control {
+            width: 300px;
+        }
+
+        .container {
+            width: 600px;
+            margin: 0 auto;
+            margin-top: 50px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .btn-cadastro {
+            background-color: green;
+            color: white;
+            width: 250px;
+            margin-top: 30px;
+        }
+
+        .header {
+            background-color: gold;
+            padding: 10px 0;
+        }
+
+        .btn-voltar {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Gestão de Veículos escolares</h1>
+</div>
+<a onclick="window.history.back()" style="margin: 10px;" class="btn btn-voltar">Voltar</a>
+<div class="container">
+    <h2 class="text-center">Cadastro de Rota</h2>
+    
+    <form th:action="@{/rotas/add}" method="post">
+        <div class="form-group">
+            <label for="origem">Origem:</label>
+            <input type="text" step="0.01" class="form-control" id="origem" name="origem" required>
+        </div>
+        <div class="form-group">
+            <label for="destino">Destino:</label>
+            <input type="text" class="form-control" id="destino" name="destino">
+        </div>
+        <div class="form-group">
+            <label for="gestor">Gestor:</label>
+            <select class="form-control" id="gestor" name="gestor" required>
+                <option value="">Selecione um gestor</option>
+                        <th:each th:each="g : ${gestor}">
+                            <option th:value="${g.id}" th:text="${g.nome}"></option>
+                        </th:each>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-cadastro btn-block">Cadastrar Rota</button>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

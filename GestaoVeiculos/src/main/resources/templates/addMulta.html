@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Multa</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-control {
+            width: 300px;
+        }
+
+        .container {
+            width: 600px;
+            margin: 0 auto;
+            margin-top: 50px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .btn-cadastro {
+            background-color: green;
+            color: white;
+            width: 250px;
+            margin-top: 30px;
+        }
+
+        .header {
+            background-color: gold;
+            padding: 10px 0;
+        }
+
+        .btn-voltar {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Gestão de Veículos escolares</h1>
+</div>
+<a onclick="window.history.back()" style="margin: 10px;" class="btn btn-voltar">Voltar</a>
+<div class="container">
+    <h2 class="text-center">Cadastro de Multa</h2>
+    
+    <form th:action="@{/multa/add}" method="post">
+        <div class="form-group">
+            <label for="valor">Valor em reais:</label>
+            <input type="number" step="0.01" class="form-control" id="valor" name="valor" required>
+        </div>
+        <div class="form-group">
+            <label for="descricao">Descrição:</label>
+            <input type="text" class="form-control" id="descricao" name="descricao">
+        </div>
+        <div class="form-group">
+            <label for="veiculo">Placa do veículo:</label>
+            <select class="form-control" id="veiculo" name="veiculo" required>
+                     <th:each th:each="veiculo : ${veiculo}">
+                         <option th:value="${veiculo.placa}" th:text="${veiculo.placa}"></option>
+                     </th:each>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-cadastro btn-block">Cadastrar Multa</button>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

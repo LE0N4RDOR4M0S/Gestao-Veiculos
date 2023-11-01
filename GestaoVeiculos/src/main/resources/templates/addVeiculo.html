@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Veículo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-control {
+            width: 300px;
+        }
+
+        .container {
+            width: 1000px;
+            margin-left: 22%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .btn-cadastro {
+			width: 200px;
+            background-color: green;
+            color: white;
+            margin-left:50%;
+            border:2px solid darkgreen;
+        }
+
+        .header {
+            background-color: gold;
+            padding: 10px 0;
+            border-bottom: 2px solid goldenrod;
+        }
+
+        .btn-voltar {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Gestão de veículos escolares</h1>
+</div>
+<a onclick="window.history.back()" style="margin: 10px;" class="btn btn-voltar">Voltar</a>
+<div class="container">
+    <h2 style="margin: 10px;">Cadastro de Veículo</h2>
+    
+    <form th:action="@{/veiculos/add}" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="placa">Placa:</label>
+                    <input type="text" class="form-control" id="placa" name="placa" required>
+                </div>
+                <div class="form-group">
+                    <label for="tipo">Tipo:</label>
+                    <input type="text" class="form-control" id="tipo" name="tipo" required>
+                </div>
+                <div class="form-group">
+                    <label for="acessibilidade">Acessibilidade:</label>
+                    <select class="form-control" id="acessibilidade" name="acessibilidade" required>
+                        <option value="true">Sim</option>
+                        <option value="false">Não</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="estacionamento">Estacionamento:</label>
+                    <input type="text" class="form-control" id="estacionamento" name="estacionamento" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="modelo">Modelo:</label>
+                    <input type="text" class="form-control" id="modelo" name="modelo" required>
+                </div>
+                <div class="form-group">
+                    <label for="ano">Ano:</label>
+                    <input type="number" class="form-control" id="ano" name="ano" required>
+                </div>
+                <div class="form-group">
+                    <label for="renavam">Renavam:</label>
+                    <input type="number" class="form-control" id="renavam" name="renavam" required>
+                </div>
+                <div class="form-group">
+                    <label for="qtd_lugares">Quantidade de Lugares:</label>
+                    <input type="number" class="form-control" id="qtd_lugares" name="qtd_lugares" required>
+                </div>
+                <div class="form-group">
+                    <label for="rota">Rota:</label>
+                    <select type="number" class="form-control" id="rota" name="rota" required>
+                        <option>Selecione uma rota</option>
+                        <th:block th:each="r : ${rotas}">
+                            <option th:value="${r.id}" th:text="${r.id}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-cadastro btn-block">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

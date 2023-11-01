@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> - Gestão de Veículos Escolares</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .container {
+	display: flex;
+    justify-content: space-between; /* Alinhar os quadrados na horizontal com espaçamento entre eles */
+    align-items: flex-start; /* Alinhar no topo */
+    width: 3000px;
+    height: 600px;
+    background-color: white;
+    padding: 20px;
+    margin-top: 100px;
+    margin-right: 100px;
+    border-radius: 20px;
+}
+
+        .dashboard {
+            display: flex;
+    		flex-direction: column;
+
+        }
+
+        h1 {
+            color: #333;
+            font-size: 40px;
+        }
+        h2{
+			margin-bottom: 10px;
+		}
+
+        .input-group{
+            width: 300px;
+        }
+
+        .yellow-bar {
+            background-color: yellow;
+            border-radius: 5px;
+            height: 100%;
+            width: 100px;
+            position: initial;
+            right: 0;
+            top: 0;
+        }
+        p {
+			width: 300px;
+			padding: 40px;
+			background-color: aliceblue;
+			margin:60px;
+		}
+		
+		.cadastro-button {
+			width: 100px;
+			background-color: green;
+			border: 2px solid darkgreen;
+			color: aliceblue;
+			border-radius: 10px;
+		}
+		
+		th{
+			width: 300px;
+			margin-top: 10px;
+		}
+
+        /* Botões quadrados */
+        .square-button {
+            width: 100px;
+            height: 100px;
+            background-color: yellow; /* Cor da faixa amarela lateral */
+            color: white;
+            border: none;
+            border-radius: 0;
+            transition: background-color 0.3s; /* Transição de cor ao passar o mouse */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Efeito de escurecimento ao passar o mouse */
+        .square-button:hover {
+            background-color: #999; /* Cor mais escura ao passar o mouse */
+        }
+		
+		/* Div para alinhar botões à direita */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        /* Estilo para centralizar a imagem e definir a largura */
+        .square-button img {
+            width: 50px; /* Largura desejada */
+        }
+        /* Estilos dos quadrados */
+	.square {
+    width: 350px;
+    height: 150px;
+    margin: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    flex: 1;
+}
+
+	/* Estilos de cores dos quadrados */
+	.square.green {
+    background-color: darkgreen;
+}
+
+	.square.red {
+    background-color: darkred;
+}
+
+.square.yellow {
+    background-color: yellow;
+}
+
+/* Estilos para o texto dentro dos quadrados */
+.square h2 {
+    color: white;
+    font-size: 20px;
+}
+
+.square h1 {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+      .pie-chart {
+    align-self: center;
+    margin-right: 100px;
+}
+		
+    </style>
+</head>
+<body>
+	<div th:replace="tituloAba"></div>
+    <div class="container">
+        <div class="quadrados">
+            <!-- Quadrado 1 - Veiculos em atividade -->
+            <div style="background-color: darkgreen;" class="square green">
+                <h2>Veiculos em atividade:</h2>
+                <h1 th:text="${atividade}" id="atividade"></h1>
+            </div>
+
+            <!-- Quadrado 2 - Veiculos estacionados -->
+            <div style="background-color: darkred;" class="square red">
+                <h2>Veiculos estacionados:</h2>
+                <h1 th:text="${estacionado}" id="estacionado"></h1>
+            </div>
+
+            <!-- Quadrado 3 - Veiculos em manutenção -->
+            <div style="background-color: yellow;" class="square yellow">
+                <h2 style="color: black;">Veiculos em manutenção:</h2>
+                <h1 style="color: black;" th:text="${manutencao}" id="manutencao"></h1>
+            </div>
+        </div>
+
+        <div class="pie-chart">
+            <canvas id="myPieChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+    <div th:replace="menu"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    window.onload = function() {
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+    	var nmrAtividade = document.getElementById('atividade');
+    	var atividade = parseInt(nmrAtividade.textContent);
+    	var nmrManutencao = document.getElementById('manutencao');
+    	var manutencao = parseInt(nmrManutencao.textContent);
+    	var estacionadoElement = document.getElementById('estacionado');
+    	var estacionado = parseInt(estacionadoElement.textContent); 
+
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Em Atividade', 'Em Manutenção', 'Estacionados'],
+                datasets: [{
+                    data: [atividade, manutencao, estacionado],
+                    backgroundColor: ['darkgreen', 'yellow', 'darkred'],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+    }
+	</script>
+
+</body>
+</html>

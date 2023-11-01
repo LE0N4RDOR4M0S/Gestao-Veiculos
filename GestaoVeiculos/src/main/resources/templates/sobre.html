@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulário de Informações do Sistema</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            text-align: left;
+            width: 1200px;
+            height: 600px;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            height: 150px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        p{
+			font-size: 18px;
+		}
+    </style>
+</head>
+<body>
+    <div class="form-container">
+		<div th:replace="tituloAba"></div>
+        <h1>Informações do Sistema</h1>
+        <h2>Descrição do sistema:</h2>
+        <p> </p>
+        <p>O Sistema de Gerenciamento de Veículos Escolares é uma aplicação desenvolvida pensando em otimizar e simplificar a gestão de frotas de veículos utilizados no transporte escolar. Este sistema foi projetado com o objetivo de proporcionar uma solução eficiente para escolas, empresas de transporte escolar e órgãos responsáveis pelo controle dessas frotas.</p>
+        <h3>Autor</h3>
+        <p>Esse sistema foi pensado e desenvolvido por Leonardo de Oliveira Ramos como projeto final para o último módulo de aprendizado do curso de programador de sistema fornecido e aplicado pela Secretaria de Ciência, Tecnologia e Inovação do Estado de Mato Grosso</p>
+        <p>Contato: leoolivramos@gmail.com
+					(65)9 9212-1341
+		</p>
+        
+        <h4>Tecnologias aplicadas:</h4>
+        <p>Java Spring: utilizado para back end</p>
+        <p>HTML/CSS: utilizado para front end</p>
+        <p>JavaScript: utilizado para interatividade ,manipulação dos elementos e controle de eventos</p>
+        <p>Thymeleaf: utilizado para preenchimento de dados dinâmicos gerados</p>
+        <p>PostgreSQL: banco de dados relacional</p>
+        <p>Google Cloud: foi utilizado a API Directions da Maps</p>
+        <p>Versão do software: 3.0</p>
+        
+        
+    </div>
+    <div th:replace="menu"></div>
+</body>
+</html>

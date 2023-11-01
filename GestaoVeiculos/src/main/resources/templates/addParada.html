@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Parada</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-control {
+            width: 500px;
+            margin: 10px;
+        }
+
+        .container {
+            width: 1400px;
+            margin-left: 10%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .btn-cadastro {
+            width: 200px;
+            height: 60px;
+            background-color: green;
+            color: white;
+            margin-left: 80%;
+            border: 2px solid darkgreen;
+            border-radius: 10px;
+        }
+
+        .header {
+            background-color: gold;
+            padding: 10px 0;
+            border-bottom: 2px solid goldenrod;
+        }
+
+        .btn-voltar {
+            background-color: red;
+            color: white;
+        }
+
+        #map {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="header">
+        <h1>Gestão de veículos escolares</h1>
+    </div>
+    <a onclick="window.history.back()" style="margin-left: 10px;" class="btn btn-voltar">Voltar</a>
+    <div class="container">
+        <h2 >Cadastro de Paradas</h2>
+
+        <form th:action="@{/paradas/add}" method="post" id="cadastroParadaForm">
+            <div class="row">
+                <div class="form-group">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" class="form-control" id="endereco" name="endereco" required>
+                </div>
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+                <button style="background-color: blue; margin-left: 10%;" type="button" class="btn-cadastro" id="buscarLocalizacao">Buscar Localização</button>
+            </div>
+            <div id="map"></div>
+        </form>
+        <button type="button" class="btn-cadastro" id="confirmar">Confirmar</button>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            var map;
+            var marker;
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: 0, lng: 0}, // Coordenadas iniciais do mapa
+                    zoom: 15 // Nível de zoom inicial
+                });
+
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: {lat: 0, lng: 0}, // Coordenadas iniciais do marcador
+                    draggable: true // Permite que o marcador seja arrastado
+                });
+            }
+
+            $(document).ready(function() {
+                $('#buscarLocalizacao').click(function() {
+                    var endereco = $('#endereco').val();
+
+                    $.ajax({
+                        url: 'https://maps.googleapis.com/maps/api/geocode/json',
+                        data: {
+                            address: endereco,
+                            key: 'AIzaSyCsPGkYgQ1OgzQ0-oMPdq8oY-AuVFVkIc8' // Substitua pela sua chave
+                        },
+                        success: function(response) {
+                            if (response.status === 'OK' && response.results.length > 0) {
+                                var resultado = response.results[0];
+                                var latitude = resultado.geometry.location.lat;
+                                var longitude = resultado.geometry.location.lng;
+
+                                $('#latitude').val(latitude);
+                                $('#longitude').val(longitude);
+
+                                // Atualize a posição do marcador no mapa
+                                var location = {lat: latitude, lng: longitude};
+                                marker.setPosition(location);
+                                map.setCenter(location);
+                            } else {
+                                alert('Endereço não encontrado ou ocorreu um erro na busca.');
+                            }
+                        },
+                        error: function() {
+                            alert('Ocorreu um erro na busca do endereço.');
+                        }
+                    });
+                });
+
+                // Adicione o manipulador de eventos para o botão "Confirmar"
+                $('#confirmar').click(function() {
+                    // Envie o formulário quando o botão "Confirmar" for clicado
+                    $('#cadastroParadaForm').submit();
+                });
+            });
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsPGkYgQ1OgzQ0-oMPdq8oY-AuVFVkIc8&callback=initMap" async defer></script>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

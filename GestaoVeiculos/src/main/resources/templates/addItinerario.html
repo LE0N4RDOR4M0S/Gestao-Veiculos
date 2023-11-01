@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Itinerário</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-control {
+            width: 300px;
+        }
+
+        .container {
+            width: 600px;
+            margin: 0 auto;
+            margin-top: 50px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .btn-cadastro {
+            background-color: green;
+            color: white;
+            width: 250px;
+            margin-top: 30px;
+        }
+
+        .header {
+            background-color: yellow;
+            padding: 10px 0;
+        }
+
+        .btn-voltar {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Formulário</h1>
+</div>
+<a onclick="window.history.back()" style="margin: 10px;" class="btn btn-voltar">Voltar</a>
+<div class="container">
+    <h2 class="text-center">Cadastro de Itinerário</h2>
+    
+    <form th:action="@{/itinerario/add}" method="post">
+        <div class="form-group">
+            <label for="parada">Parada:</label>
+            <select class="form-control" id="parada" name="parada" required>
+                <option value="">Selecione uma parada</option>
+                        <th:each th:each="parada : ${parada}">
+                            <option th:value="${parada.id}" th:text="${parada.endereco}"></option>
+                        </th:each>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rota">Rota:</label>
+            <select class="form-control" id="rota" name="rota" required>
+                <option value="rota">Selecione um rota</option>
+                        <th:each th:each="rota : ${rota}">
+                            <option th:value="${rota.id}" th:text="${rota.id}"></option>
+                        </th:each>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hora">Hora:</label>
+            <input type="time" class="form-control" id="hora" name="hora">
+        </div>
+        <button type="submit" class="btn btn-cadastro btn-block">Cadastrar Rota</button>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

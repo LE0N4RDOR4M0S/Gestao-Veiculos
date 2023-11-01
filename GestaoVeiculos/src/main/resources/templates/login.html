@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: whitesmoke;
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: transparent;
+            text-align: left;
+            padding: 30px 0;
+        }
+
+        .left-align-label {
+            text-align: left;
+            margin: 10px;
+        }
+
+        .container {
+            max-width: 700px;
+            height: 500px;
+            margin: 0 auto; /* Centraliza horizontalmente */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centraliza verticalmente */
+            text-align: left; /* Alinha o texto à esquerda */
+            padding: 20px;
+            background-color:white; 
+            border-radius: 10px;
+            position: relative; /* Para permitir posicionamento absoluto */
+            border: 1px gray solid;
+        }
+
+
+        h1 {
+            color: black;
+            margin: 10px;
+            font-size: 25;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            text-align: left; /* Alinha o texto do label à esquerda */
+            margin-bottom: 5px; /* Espaçamento abaixo do label */
+            color: black;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid rgb(146, 144, 135);
+            border-radius: 3px;
+            background-color:whitesmoke;
+        }
+
+        #login-btn {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 40px;
+        }
+        button {
+            width: 87%;
+            height: 60px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 20px;
+            margin-top: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Gestão de Veículos Escolares</h1>
+    </div>
+    <div class="container">
+
+        <h2 style="text-align: left; color: black;" >Login</h2>
+        <form th:action="@{/auth/login}" method="post" id="login-form">
+            <label for="username" class="left-align-label">Usuário</label>
+            <input type="text" id="username" name="username" placeholder="Usuário" required>
+            
+            <label for="password" class="left-align-label">Senha</label>
+            <input style="margin-top: 10px; margin-right: 10px;" type="password" id="password" name="password" placeholder="Senha" required>
+            
+            <button style="border-radius: 20px;background-color: gold; color: black;" type="submit" id="login-btn" >Entrar</button>
+        </form>
+    </div>
+</body>
+</html>

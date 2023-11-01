@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Atualizar Paradas Cadastradas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Estilos para centralizar a div */
+        .centered-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ajuste a altura conforme necessário */
+        }
+
+        /* Estilos para o formulário */
+        .edit-form {
+            width: 500px;
+            height: 500px;
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px; /* Espaçamento entre grupos de elementos */
+        }
+
+        .btn-vermelho {
+            background-color: #FF0000;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        /* Estilize o botão quando o cursor estiver sobre ele */
+        .btn-vermelho:hover {
+            background-color: #CC0000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar amarela -->
+    <nav class="navbar navbar-expand-lg navbar-warning bg-warning">
+        <div class="container">
+            <h1>Sistema de Gestão de Veículos</h1>
+        </div>
+    </nav>
+
+    <div class="centered-div">
+        <div class="edit-form p-4">
+            <h2>Atualizar nome da parada</h2>
+
+            <form th:action="'/paradas/update/' + ${parada.id}" method="post">
+                <div style="display: none;" class="form-group">
+                    <input type="number" id="id" name="id" th:value="${parada.id}" readonly>
+                    <input type="number" id="id" name="latitude" th:value="${parada.latitude}" readonly>
+                    <input type="number" id="id" name="longitude" th:value="${parada.longitude}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="endereco" class="mb-1">Endereço:</label>
+                    <input type="text" id="endereco" name="endereco" th:value="${parada.endereco}" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a href="/paradas" style="margin-left: 20px;" class="btn btn-danger">Voltar</a>
+                </div>
+            </form>
+
+            <!-- Adicione um botão ou link para voltar à lista de paradas -->
+            
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Informações do Veículo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: whitesmoke;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: gold;
+            text-align: left;
+            padding: 30px 0;
+            border-bottom: 3px solid rgb(191, 140, 11);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: left;
+            padding: 20px;
+            background-color: #FFF;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .info-label {
+            font-weight: bold;
+        }
+
+        .info-value {
+            margin-bottom: 20px;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            background-color: #ccc;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+		.status-badge {
+    		width: 20px;
+    		height: 20px;
+    		display: inline-block;
+    		margin-right: 5px;
+    		border-radius: 50%;
+		}
+
+		.status-red {
+    		background-color: red;
+		}
+
+		.status-green {
+    		background-color: green;
+		}
+
+		.status-yellow {
+    		background-color: yellow;
+		}
+		.table{
+			width: 100%;
+			background-color: lightgray;
+		}
+		
+		.table-container{
+			max-height: 200px;
+			overflow-y: auto;
+		}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Gestão de Veículos escolares</h1>
+    </div>
+    <div class="container">
+        <h2>Dados do Veículo</h2>
+        
+        <div class="info-label">Placa do Veículo:</div>
+        <div class="info-value" th:text="${veiculo.placa}"></div>
+
+        <div class="info-label">Tipo:</div>
+        <div class="info-value" th:text="${veiculo.tipo}"></div>
+
+        <div class="info-label">Acessibilidade:</div>
+        <div class="info-value" th:text="${veiculo.acessibilidade == true ? 'Tem' : 'Não tem'}"></div>
+
+        <div class="info-label">Endereço do Estacionamento:</div>
+        <div class="info-value" th:text="${veiculo.estacionamento}"></div>
+
+        <div class="info-label">Modelo do Veículo:</div>
+        <div class="info-value" th:text="${veiculo.modelo}"></div>
+
+        <div class="info-label">Ano:</div>
+        <div class="info-value" th:text="${veiculo.ano}"></div>
+        
+        
+
+        <div class="info-label">Número da Rota: <a style="background-color: gray;" th:href="@{'/rotas/' + ${veiculo.rota.id}}" class="btn btn-success btn-sm">Detalhes da rota</a></div>
+        <div class="info-value" th:text="${veiculo.rota.id}">
+        </div>
+        
+
+        <div class="info-label">Status do Veículo: <a th:href="@{'/veiculos/alterStatus/' + ${veiculo.placa}}" style="background-color: orange; width: 200px;padding: 10px; margin-left: 10px;" class="btn btn-primary btn-sm">Mudar Status</a></div>
+		<div class="info-value">
+    		<div th:if="${veiculo.status == 'estacionado'}" class="status-badge status-red"></div>
+    		<div th:if="${veiculo.status == 'atividade'}" class="status-badge status-green"></div>
+    		<div th:if="${veiculo.status == 'manutencao'}" class="status-badge status-yellow"></div>
+    	<span th:text="${veiculo.status}"></span>
+		</div>
+		
+
+
+        <h2>Multas</h2>
+        <a th:href="@{'/multa/add/' + ${veiculo.placa}}" class="btn btn-success btn-sm">Adicionar+</a>
+        <div class="table-container">
+        <table class="table">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th >Id</th>
+                        <th >Data</th>
+                        <th >Valor</th>
+                        <th>Descrição</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="m : ${multas}">
+                        <td th:text="${m.Id}"></td>
+                        <td th:text="${m.data}"></td>
+                        <td th:text="${m.valor}"></td>
+                        <td th:text="${m.descricao}"></td>
+                        <td>
+                            <a th:href="@{'/multa/delete/' + ${m.Id}}" class="btn btn-danger delete-link">Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </table>
+        </div>
+
+        <h2>Manutenções</h2>
+        <a th:href="@{'/manutencao/add/' + ${veiculo.placa}}" class="btn btn-success btn-sm">Adicionar+</a>
+        <div class="table-container">
+        <table class="table">
+            <table class="table">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th >Id</th>
+                        <th >Data</th>
+                        <th> Conclusão </th>
+                        <th>Descrição</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="m : ${manutencoes}">
+                        <td th:text="${m.id}"></td>
+                        <td th:text="${m.dataEntrada}"></td>
+                        <td th:text="${m.dataSaida}" ></td>
+                        <td th:text="${m.descricao}"></td>
+                        <td>
+                            <a th:if="${m.dataSaida == null}" th:href="@{'/manutencao/concluir/' + ${m.id}}" style="margin-bottom: 10px; background-color: darkorange;" class="btn btn-danger">Concluir</a>
+                            <a th:href="@{'/manutencao/delete/' + ${m.id}}" class="btn btn-danger delete-link">Excluir</a>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </table>
+        </table>
+        </div>
+
+        <a style="background-color: darkred; color: white;" class="back-btn" href="/veiculos">Voltar</a>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var deleteLinks = document.querySelectorAll(".delete-link");
+
+        deleteLinks.forEach(function (link) {
+            link.addEventListener("click", function (event) {
+                event.preventDefault(); // Impede o link de redirecionar imediatamente
+
+                var confirmDelete = confirm("Tem certeza que deseja excluir este item?");
+
+                if (confirmDelete) {
+                    // Se o usuário confirmar, siga o link para a exclusão
+                    window.location.href = link.getAttribute("href");
+                } else {
+                    // Se o usuário cancelar, não faça nada
+                }
+            });
+        });
+    });
+	</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

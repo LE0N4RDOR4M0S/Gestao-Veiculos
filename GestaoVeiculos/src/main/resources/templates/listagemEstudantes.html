@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> - Gestão de Veículos Escolares</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .container {
+            width: 3000px;
+            height: 600px;
+            background-color: white;
+            padding: 20px;
+            margin-top: 100px;
+            margin-right: 100px;
+            border-radius: 20px;
+        }
+
+        .dashboard {
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 40px;
+        }
+        h2{
+			margin-bottom: 10px;
+		}
+
+        .input-group{
+            width: 300px;
+        }
+
+        .yellow-bar {
+            background-color: yellow;
+            border-radius: 5px;
+            height: 100%;
+            width: 100px;
+            position: initial;
+            right: 0;
+            top: 0;
+        }
+        p {
+			width: 300px;
+			padding: 40px;
+			background-color: aliceblue;
+			margin:60px;
+		}
+		
+		.cadastro-button {
+			width: 100px;
+			background-color: green;
+			border: 2px solid darkgreen;
+			color: aliceblue;
+			border-radius: 10px;
+			padding: 10px;
+			margin:10px;
+		}
+		
+		th{
+			width: 300px;
+			margin-top: 10px;
+		}
+
+        /* Botões quadrados */
+        .square-button {
+            width: 100px;
+            height: 100px;
+            background-color: yellow; /* Cor da faixa amarela lateral */
+            color: white;
+            border: none;
+            border-radius: 0;
+            transition: background-color 0.3s; /* Transição de cor ao passar o mouse */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Efeito de escurecimento ao passar o mouse */
+        .square-button:hover {
+            background-color: #999; /* Cor mais escura ao passar o mouse */
+        }
+		
+		/* Div para alinhar botões à direita */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        /* Estilo para centralizar a imagem e definir a largura */
+        .square-button img {
+            width: 50px; /* Largura desejada */
+        }
+        
+        .table-container{
+			max-height: 400px;
+			overflow-y: auto;
+		}
+		
+    </style>
+</head>
+<body>
+	<div th:replace="tituloAba"></div>
+    <div class="container">
+        <div>
+            <h2>Estudantes Cadastrados</h2>
+            <a th:href="@{/estudante/add}" class="cadastro-button">Cadastrar+</a>
+            
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Insira o nome" id="searchInput">
+                <div class="input-group-append">
+                    <button style="background-color: black; color: white;" class="btn btn-outline-secondary" type="button" id="searchButton">Pesquisar</button>
+                </div>
+            </div>
+        <div class="table-container">
+            <table id="TableEstudante" class="table table-bordered table-hover">
+                <thead style="margin-top: 10px;">
+                    <tr>
+                        <th style="width: 10px;">Matricula</th>
+                        <th style="width: 40px;">Nome</th>
+                        <th style="width: 20px;">Turno</th>
+                        <th>Endereço</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="e : ${estudante}">
+                        <td th:text="${e.idMatricula}"></td>
+                        <td th:text="${e.nome}"></td>
+                        <td th:text="${e.turno}"></td>
+                        <td th:text="${e.enderecoResidencial}"></td>
+                        <td>
+                            <a th:href="@{'/estudante/update/' + ${e.idMatricula}}" style="background-color: yellow" class="cadastro-button">Editar</a>
+                            <a th:href="@{'/estudante/delete/' + ${e.idMatricula}}" style="background-color: red" class="cadastro-button delete-link">Apagar</a>
+                            <a th:href="@{'/estudante/' + ${e.idMatricula}}" style="background-color:dimgrey" class="cadastro-button">Detalhes</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+    <div th:replace="menu"></div>
+    <script>
+		document.addEventListener("DOMContentLoaded", function () {
+        var tabela = document.getElementById("TableEstudante");
+        var inputPesquisa = document.getElementById("searchInput");
+        var searchButton = document.getElementById("searchButton");
+
+        searchButton.addEventListener("click", function () {
+            var filtro = inputPesquisa.value.toLowerCase();
+            var linhas = tabela.getElementsByTagName("tr");
+
+            for (var i = 1; i < linhas.length; i++) { 
+                var celula = linhas[i].getElementsByTagName("td")[1]; 
+                if (celula) {
+                    var texto = celula.textContent.toLowerCase();
+                    linhas[i].style.display = texto.includes(filtro) ? "" : "none";
+                }
+            }
+        });
+    });
+	</script>
+	<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var deleteLinks = document.querySelectorAll(".delete-link");
+
+        deleteLinks.forEach(function (link) {
+            link.addEventListener("click", function (event) {
+                event.preventDefault(); // Impede o link de redirecionar imediatamente
+
+                var confirmDelete = confirm("Tem certeza que deseja excluir este item?");
+
+                if (confirmDelete) {
+                    // Se o usuário confirmar, siga o link para a exclusão
+                    window.location.href = link.getAttribute("href");
+                } else {
+                    // Se o usuário cancelar, não faça nada
+                }
+            });
+        });
+    });
+	</script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Atualizar Informações do Motorista</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: whitesmoke;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: gold;
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 3px solid rgb(191, 140, 11);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: left;
+            padding: 20px;
+            background-color: #FFF;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #333;
+            text-align: left;
+            margin: 10px 0;
+        }
+
+        .info-label {
+            font-weight: bold;
+        }
+
+        .info-value {
+            margin-bottom: 20px;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            background-color: darkred;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+		.status-badge {
+    		width: 20px;
+    		height: 20px;
+    		display: inline-block;
+    		margin-right: 5px;
+    		border-radius: 50%;
+		}
+
+		.status-red {
+    		background-color: red;
+		}
+
+		.status-green {
+    		background-color: green;
+		}
+
+		.status-yellow {
+    		background-color: yellow;
+		}
+		.table{
+			width: 400px;
+			background-color: lightgray;
+		}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Gestão de Veículos escolares</h1>
+    </div>
+    <div class="container">
+        <h2>Atualizar Dados do Motorista</h2>
+
+        <form method="POST" th:action="'/motorista/update/' + ${motorista.cnh}">
+            <!-- Nome -->
+            <div class="form-group">
+                <label for="cnh">CNH:</label>
+                <input type="text" class="form-control" id="cnh" name="cnh" th:value="${motorista.cnh}" readonly>
+        	</div>
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" name="nome" th:value="${motorista.nome}">
+            </div>
+            
+            <div class="form-group">
+                <label for="endereco">Endereço:</label>
+                <input type="text" class="form-control" id="endereco" name="endereco" th:value="${motorista.endereco}">
+            </div>
+            
+            <div class="form-group">
+                <label for="contato">Contato:</label>
+                <input type="tel" class="form-control" id="contato" name="contato" th:value="${motorista.contato}">
+            </div>
+            
+            <div class="form-group">
+            <label for="turno">Turno:</label>
+            	<select class="form-control" id="turno" name="turno" required>
+                	<option value="Matutino">Matutino</option>
+                	<option value="Vespertino">Vespertino</option>
+                	<option value="Noturno">Noturno</option>
+            	</select>
+        	</div>
+        	
+        	<div class="form-group">
+            <label for="rota">Rota:</label>
+            <select class="form-control" id="rota" name="rota" required>
+                <option >Selecione um rota</option>
+                        <th:each th:each="rota : ${rotas}">
+                            <option th:value="${rota.id}" th:text="${rota.id}"></option>
+                        </th:each>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="veiculo">Veiculo:</label>
+            <select class="form-control" id="veiculo" name="veiculo" required>
+                <option>Selecione um veiculo</option>
+                        <th:each th:each="veiculo : ${veiculos}">
+                            <option th:value="${veiculo.placa}" th:text="${veiculo.placa}"></option>
+                        </th:each>
+            </select>
+        </div>
+
+            <!-- Botão para enviar o formulário -->
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        </form>
+
+        <button style="background-color: darkred; color: white; margin-top: 10px;" class="back-btn" onclick="window.history.back()">Voltar</button>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

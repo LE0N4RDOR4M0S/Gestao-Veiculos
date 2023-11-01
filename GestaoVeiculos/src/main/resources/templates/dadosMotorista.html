@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Informação do motorista</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: whitesmoke;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: white;
+            text-align: left;
+            padding: 30px 0;
+            border-bottom: 3px solid rgb(191, 140, 11);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: left;
+            padding: 20px;
+            background-color: #FFF;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .info-label {
+            font-weight: bold;
+        }
+
+        .info-value {
+            margin-bottom: 20px;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            background-color: #ccc;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+		.status-badge {
+    		width: 20px;
+    		height: 20px;
+    		display: inline-block;
+    		margin-right: 5px;
+    		border-radius: 50%;
+		}
+
+		.status-red {
+    		background-color: red;
+		}
+
+		.status-green {
+    		background-color: green;
+		}
+
+		.status-yellow {
+    		background-color: yellow;
+		}
+		.table{
+			width: 400px;
+			background-color: lightgray;
+		}
+		
+		.edit-btn {
+            background-color: yellow;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px; /* Ajuste a posição vertical conforme necessário */
+            right: 10px; /* Ajuste a posição horizontal conforme necessário */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Gestão de Veículos escolares</h1>
+    </div>
+    <div class="container">
+        <h2>Dados do Motorista</h2>
+        
+        <div class="info-label">Nome:</div>
+        <div class="info-value" th:text="${motorista.nome}"></div>
+
+        <div class="info-label">Cnh:</div>
+        <div class="info-value" th:text="${motorista.cnh}"></div>
+        
+        <div class="info-label">Endereço:</div>
+        <div class="info-value" th:text="${motorista.endereco}"></div>
+        
+        <div class="info-label">Turno:</div>
+        <div class="info-value" th:text="${motorista.turno}"></div>
+        
+        <div class="info-label">Contato:</div>
+        <div class="info-value" th:text="${motorista.contato}"></div>
+        
+        <div class="info-label">Rota: <a style="background-color: green;" th:href="@{'/rotas/' + ${motorista.rota.id}}" class="btn btn-success btn-sm">Detalhes da rota</a></div>
+        <div class="info-value" th:text="${motorista.rota.id}"></div>
+        
+        <div class="info-label">Veiculo: <a style="background-color: green;" th:href="@{'/veiculos/' + ${motorista.veiculo.placa}}" class="btn btn-success btn-sm">Detalhes do veículo</a></div>
+        <div class="info-value" th:text="${motorista.veiculo.placa}"></div>
+         
+        <button style="background-color: darkred; color: white;" class="back-btn" onclick="window.history.back()">Voltar</button>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

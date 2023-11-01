@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Acesso Negado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .access-denied-container {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .access-denied-message {
+            font-size: 24px;
+            color: #d9534f; /* Cor vermelha para indicar erro ou acesso negado */
+        }
+
+        .back-to-login-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #337ab7; /* Cor azul para o botão */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-to-login-button:hover {
+            background-color: #286090; /* Cor mais escura ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+    <div class="access-denied-container">
+        <p style="font-size: 40px;" class="access-denied-message" > <i class="fas fa-exclamation-triangle"></i>Acesso Negado</p>
+        <a href="/auth/login" class="back-to-login-button">Voltar para o Login</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: whitesmoke;
+        margin: 0;
+    }
+
+    .card {
+        position: relative;
+    }
+
+    .menu {
+        width: 67px;
+        height: 100%;
+        background-color:gainsboro;
+        border-radius: 10px;
+        
+        overflow: hidden;
+        transition: width 0.5s ease; /* Transição de largura */
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    /* Pseudoclasse :hover para mostrar o menu quando o mouse passar por cima */
+    .menu:hover {
+        width: 225px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+    }
+
+    li {
+        list-style: none;
+        height: calc(100% / 9);
+        width: 100%;
+        padding-left: 23px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    li:hover {
+        background-color: #dddddd;
+    }
+
+    span {
+        margin-left: 20px;
+        white-space: nowrap;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    /* Pseudoclasse :hover para mostrar o texto do menu quando o mouse passar por cima */
+    .menu:hover span {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    a{
+		color: black;
+	}
+	
+
+    
+</style>
+<body>
+<div class="card">
+    <div class="menu">
+        <ul>
+            <li>
+                <i class="fas fa-chart-bar fa-lg"></i>
+                <span><a href="/dashboard">Dashboard</a></span>
+            </li>
+            <li>
+                <i class="fas fa-user-graduate fa-lg"></i>
+                <span><a href="/estudante">Estudantes</a></span>
+            </li>
+            <li>
+                <i class="fas fa-user-tie fa-lg"></i>
+                <span><a href="/motorista">Motoristas</a></span>
+            </li>
+            <li>
+                <i class="fas fa-map-marker-alt fa-lg"></i>
+                <span><a href="/paradas">Paradas</a></span>
+            </li>
+            <li>
+                <i class="fas fa-route fa-lg"></i>
+                <span><a href="/rotas">Rotas</a></span>
+            </li>
+            <li>
+                <i class="fas fa-users fa-lg"></i>
+                <span><a href="/user">Gestores</a></span>
+            </li>
+            <li>
+                <i class="fas fa-car fa-lg"></i>
+                <span><a href="/veiculos">Veículos</a></span>
+            </li>
+            <li>
+                <i class="fas fa-file-alt fa-lg"></i>
+                <span><a href="/sobre">Sobre</a></span>
+            </li>
+            <li>
+                <i class="fas fa-sign-out-alt fa-lg"></i>
+                <span><a href="/auth/login">Log Out</a></span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
