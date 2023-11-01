@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.Motorista;
 import com.example.demo.domain.Veiculo;
 import com.example.demo.repository.MotoristaRepository;
 import com.example.demo.repository.VeiculoRepository;
@@ -21,7 +20,7 @@ public class VeiculoServices {
 	@Autowired
 	VeiculoRepository veiculore;
 	
-	@Autowired 
+	@Autowired
 	MotoristaRepository motoristare;
 	
 	/*Função para retornar todos os veículos cadastrados no sistema*/
