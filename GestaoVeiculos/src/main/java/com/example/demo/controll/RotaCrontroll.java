@@ -30,7 +30,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/rotas")
 public class RotaCrontroll {
 	/*-----------------------Injeções*/
-	@Autowired 
+	@Autowired
 	RotaServices rotase;
 	
 	@Autowired

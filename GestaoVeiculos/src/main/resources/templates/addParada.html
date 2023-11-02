@@ -95,7 +95,7 @@
                         url: 'https://maps.googleapis.com/maps/api/geocode/json',
                         data: {
                             address: endereco,
-                            key: 'AIzaSyCsPGkYgQ1OgzQ0-oMPdq8oY-AuVFVkIc8' // Substitua pela sua chave
+                            key: '<Chave de API>' // Substitua pela sua chave
                         },
                         success: function(response) {
                             if (response.status === 'OK' && response.results.length > 0) {
@@ -127,7 +127,7 @@
                 });
             });
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsPGkYgQ1OgzQ0-oMPdq8oY-AuVFVkIc8&callback=initMap" async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<Chave de API>" async defer></script>
     </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

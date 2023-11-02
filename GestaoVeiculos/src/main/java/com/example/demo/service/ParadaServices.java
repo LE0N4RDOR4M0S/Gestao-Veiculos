@@ -36,14 +36,6 @@ public class ParadaServices {
 		return parada;
 	}
 	
-//	/* Função para retornar apenas as paradas de um veiculo*/
-//	public List<Parada> retornarParadasPVeiculo(Veiculo idveiculo){
-//		List<Parada> paradas = new ArrayList<Parada>();
-//		paradare.findByVeiculoId(idveiculo).forEach(paradas::add);
-//		return paradas;
-//		
-//	}
-	
 	
 	/* Função para cadastrar uma nova parada*/
 	public void addParada(Parada parada){

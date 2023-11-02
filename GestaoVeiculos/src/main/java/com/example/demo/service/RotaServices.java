@@ -35,7 +35,6 @@ public class RotaServices {
 	
 	/* Função para cadastrar uma Rota*/
 	public void addRota(Rota rota) {
-		
 		rotare.save(rota);
 	}
 	
