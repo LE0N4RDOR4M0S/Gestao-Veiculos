@@ -3,7 +3,7 @@ veículos utilizados no transporte escolar. Este sistema foi projetado com o obj
 empresas de transporte escolar e órgãos responsáveis pelo controle dessas frotas.
 
 #Tecnologias aplicadas:
--> Java Spring: utilizado para back end em .html.
+-> Java Spring: utilizado para back end.
 -> HTML/CSS/Bootstrap: utilizado para front end.
 -> JavaScript: utilizado para interatividade ,manipulação dos elementos e controle de eventos.
 -> Thymeleaf: utilizado para preenchimento de dados dinâmicos gerados.
