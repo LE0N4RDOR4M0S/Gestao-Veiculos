@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.domain.Estudante;
@@ -34,9 +35,9 @@ public class EstudanteControll {
 	
 	/*-----------------Get de todos os estudantes cadastrados*/
 	@GetMapping
-	private ModelAndView returnEstudantes(){
+	private ModelAndView returnEstudantes(@RequestParam(defaultValue = "0") int page){
 		ModelAndView movi = new ModelAndView("listagemEstudantes");
-		movi.addObject("estudante", estudantese.returnEstudantes());
+		movi.addObject("estudante", estudantese.returnEstudantes(page));
 		return movi;
 	}
 	

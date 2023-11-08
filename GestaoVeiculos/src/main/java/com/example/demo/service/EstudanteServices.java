@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Estudante;
@@ -22,9 +25,9 @@ public class EstudanteServices {
 	Estudante estudante;
 	
 	/* Função para retornar todos os estudantes*/
-	public List<Estudante> returnEstudantes(){
-		List<Estudante> estudantes = new ArrayList<Estudante>();
-		esture.findAll().forEach(estudantes::add);
+	public Page<Estudante> returnEstudantes(int page){
+		Pageable pageable = PageRequest.of(page, 10);
+		Page<Estudante> estudantes = esture.findAll(pageable);
 		return estudantes;
 	}
 	
